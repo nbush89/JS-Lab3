@@ -4,9 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <link href=“https://fonts.googleapis.com/css?family=Maven+Pro&display=swap”
+    rel=“stylesheet” />
     <title>Document</title>
   </head>
   <body>
+    <div class="body-items">
+      <div class="form-entry">
+        <h1>My Contacts</h1>
+        <form>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+          />
+          <label for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+          />
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="Enter your phone number"
+          />
+          <label for="relation">Relation</label>
+          <select name="relation" id="relation">
+            <option value="">Relation</option>
+            <option value="parent">Parent</option>
+            <option value="sibling">Sibling</option>
+            <option value="friend">Friend</option>
+            <option value="partner">Partner</option>
+          </select>
+          <!-- <label for="relation">Relation</label>
+          <input type="text" name="relation" id="relation" /> -->
+          <button class="add-contact">Add</button>
+        </form>
+      </div>
+      <div class="contact-container"></div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/8e689803fb.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -10,10 +10,6 @@ class Contact {
   }
 }
 
-let myBook = new Contact("Nicole", "nbush89@gmail.com", "810.986.9923", "me");
-console.log(myBook);
-console.log(myBook.toString());
-
 class AddressBook {
   constructor() {
     this.contacts = [];
@@ -59,20 +55,65 @@ class AddressBook {
   }
 }
 
-function print(book) {
-  book.contacts.forEach(contact => console.log(contact));
-}
-
 let addressBook = new AddressBook();
 addressBook.add("Julia", "juliabush@gmail.com", "734.330.8852", "sister");
 addressBook.add("Ron", "rbush@gmail.com", "240.449.4596", "dad");
 addressBook.add("Kathy", "kathybush@gmail.com", "240.731.9549", "mom");
-addressBook.add("Regan", "reganLee@gmail.com", "313.898.3746", "niece");
 
-addressBook.deleteAt(2);
-addressBook.deleteByName("Julia");
-print(addressBook);
-addressBook.getAt(2);
-console.log(addressBook.findContactByName("Julia"));
-console.log(addressBook.findContactByRelation("sister"));
-console.log(addressBook.searchContacts("athy"));
+// function print(book) {
+//   book.contacts.forEach(contact => console.log(contact));
+// }
+
+function display() {
+  let container = document.querySelector(".contact-container");
+  container.innerHTML = "";
+  let counter = 0;
+  for (let contact of addressBook.contacts) {
+    let card = document.createElement("div");
+    let name = document.createElement("p");
+    name.innerText = `Name: ${contact.name}`;
+    card.append(name);
+    let email = document.createElement("p");
+    email.innerText = `Email: ${contact.email}`;
+    card.append(email);
+    let phone = document.createElement("p");
+    phone.innerText = `Phone: ${contact.phone}`;
+    card.append(phone);
+    let relation = document.createElement("p");
+    relation.innerText = `Relation: ${contact.relation}`;
+    card.append(relation);
+    let icon = document.createElement("i");
+    icon.classList.add("fas", "fa-trash");
+    icon.setAttribute("index-number", `${counter}`);
+    card.append(icon);
+    counter++;
+    container.append(card);
+    card.setAttribute("class", "contact-card");
+  }
+}
+display();
+
+let form = document.querySelector("form");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  addressBook.add(
+    formData.get("name"),
+    formData.get("phone"),
+    formData.get("email"),
+    formData.get("relation")
+  );
+  display();
+});
+
+let cardsContainer = document.querySelector(".contact-container");
+cardsContainer.addEventListener("click", deleted);
+
+function deleted(e) {
+  if (e.target.className === "fas fa-trash") {
+    let trashIndex = e.target.getAttribute("index-number");
+    addressBook.deleteAt(trashIndex);
+    display();
+  }
+}
